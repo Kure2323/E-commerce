@@ -14,17 +14,19 @@ public class TarjetaCredito extends MetodoPago{
     public TarjetaCredito(String nro_tarjeta, String tipo) {
         this.nro_tarjeta=nro_tarjeta;
         this.tipo=tipo;
+        validarTarjeta(nro_tarjeta, tipo);
     }
 
     private void validarTarjeta(String nro_tarjeta, String tipo) {
         System.out.println("Validando tarjeta...");
-        if (nro_tarjeta.length() == 16 &&
+        if (nro_tarjeta.matches("\\d{16}") &&
                 (tipo.equalsIgnoreCase("visa") ||
                         tipo.equalsIgnoreCase("mastercard") ||
                         tipo.equalsIgnoreCase("maestro"))) {
-
+            return;
         }
         System.out.println("Los datos de tu tarjeta no son correctos.");
+        System.exit(0);
     }
 
 

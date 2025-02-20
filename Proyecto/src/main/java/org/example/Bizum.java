@@ -1,27 +1,40 @@
 package org.example;
 
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Random;
-@ToString @Setter @NoArgsConstructor
+import java.util.Scanner;
+
+@ToString
 public class Bizum extends  MetodoPago{
-    Random rdm = new Random();
+    static Random rdm = new Random();
+    static Scanner in = new Scanner(System.in);
 
     private String telefono;
     private int pin;
 
-    public Bizum(String telefono, int pin) {
-
+    public Bizum(String telefono) {
+        this.telefono=telefono;
+        this.pin=generarPin();
+        validarBizum(in.nextInt());
     }
 
-    private int generarPin() {
-        return rdm.nextInt(100000,999999);
+    public static int generarPin() {
+        int pin = rdm.nextInt(100000,999999);
+        System.out.println(pin);
+        return pin;
     }
 
-    private void validarBizum() {
-
+    public void validarBizum(int pin) {
+        System.out.println("Validando bizum...");
+        if (telefono.matches("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]") && this.pin == pin) {
+            System.out.println("Pin correcto");
+        } else {
+            System.out.println("Error");
+            System.exit(0);
+        }
     }
 
 
