@@ -1,0 +1,49 @@
+@startuml
+
+package org.example {
+
+    abstract class MetodoPago {
+        +abstract void procesarPago(double importe)
+    }
+
+    class TarjetaCredito extends MetodoPago {
+        - String nro_tarjeta
+        - String tipo
+        + TarjetaCredito(String nro_tarjeta, String tipo)
+        - void validarTarjeta(String nro_tarjeta, String tipo)
+        + void procesarPago(double importe)
+    }
+
+    class PayPal extends MetodoPago {
+        - String cuenta
+        - double saldo
+        + PayPal(String cuenta, double saldo)
+        + PayPal(String cuenta)
+        - boolean validarPayPal(String cuenta, double importe)
+        + void procesarPago(double importe)
+    }
+
+    class Bizum extends MetodoPago {
+        - String telefono
+        - int pin
+        + Bizum(String telefono)
+        + static int generarPin()
+        + void validarBizum(int pin)
+        + void procesarPago(double importe)
+    }
+
+    class Tienda {
+        + static void realizarPago(MetodoPago metodo, double importe)
+        + static void iniciarPago()
+        - static void procesoTarjeta()
+        - static void procesoBizum()
+        - static void procesoPayPal()
+    }
+
+    TarjetaCredito --|> MetodoPago
+    PayPal --|> MetodoPago
+    Bizum --|> MetodoPago
+
+}
+
+@enduml

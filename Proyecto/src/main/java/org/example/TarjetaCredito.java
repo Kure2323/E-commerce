@@ -1,16 +1,20 @@
 package org.example;
 
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import lombok.ToString;
 
-@ToString @Setter @NoArgsConstructor
+@ToString
 public class TarjetaCredito extends MetodoPago{
 
 
     private String nro_tarjeta;
     private String tipo;
 
+    /**
+     * 
+     * @param nro_tarjeta
+     * @param tipo
+     */
     public TarjetaCredito(String nro_tarjeta, String tipo) {
         this.nro_tarjeta=nro_tarjeta;
         this.tipo=tipo;
